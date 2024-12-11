@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import "./globals.css";
+import SmokeBackground from "@/components/SmokeBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,19 +29,28 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body>
         <div className="relative min-h-screen overflow-hidden">
-          <div className="gradient-background" />
+          <SmokeBackground />
           
           {/* Navigation */}
-          <nav className="fixed top-5 left-0 right-0 z-50">
-            <div className="flex items-center justify-center h-16 px-4 backdrop-blur-sm bg-background/10">
-              <div className="flex gap-8">
-                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10">
+          <nav className="fixed top-5 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div className="flex items-center justify-center">
+              <div className="flex gap-4 sm:gap-8">
+                <Button 
+                  variant="ghost" 
+                  className="text-sm sm:text-base text-white/70 hover:text-white hover:bg-white/10"
+                >
                   About
                 </Button>
-                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10">
+                <Button 
+                  variant="ghost" 
+                  className="text-sm sm:text-base text-white/70 hover:text-white hover:bg-white/10"
+                >
                   Learn
                 </Button>
-                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10">
+                <Button 
+                  variant="ghost" 
+                  className="text-sm sm:text-base text-white/70 hover:text-white hover:bg-white/10"
+                >
                   Pricing
                 </Button>
               </div>
