@@ -1,5 +1,6 @@
-import React from 'react'
-import type { Metadata } from "next";
+'use client';
+
+import React, { useState, useEffect } from 'react'
 import { Geist, Geist_Mono } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import "./globals.css";
@@ -15,40 +16,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Transcendence",
-  description: "Raising collective consciousness through retreats, cohorts, communities, and festivals",
-  openGraph: {
-    title: "Transcendence",
-    description: "Raising collective consciousness through retreats, cohorts, communities, and festivals",
-    images: [
-      {
-        url: "/thumb.png",
-        width: 1200,
-        height: 630,
-        alt: "Transcendence",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Transcendence",
-    description: "Raising collective consciousness through retreats, cohorts, communities, and festivals",
-    images: ["/thumb.png"],
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < lastScrollY || currentScrollY < 50) {
+        setIsVisible(true);
+      } 
+      else if (currentScrollY > 50 && currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
+
   return (
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
       <body>
@@ -56,7 +52,11 @@ export default function RootLayout({
           <SmokeBackground />
           
           {/* Navigation */}
-          <nav className="fixed top-5 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+          <nav className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 transition-all duration-300 ${
+            isVisible 
+              ? 'translate-y-0 opacity-100' 
+              : '-translate-y-full opacity-0'
+          }`}>
             <div className="flex items-center justify-center">
               <div className="flex gap-4 sm:gap-8">
                 <Button 
@@ -69,7 +69,7 @@ export default function RootLayout({
                   variant="ghost" 
                   className="text-sm sm:text-base text-white/70 hover:text-white hover:bg-white/10"
                 >
-                  Learn
+                  Events
                 </Button>
                 <Button 
                   variant="ghost" 
@@ -85,5 +85,5 @@ export default function RootLayout({
         </div>
       </body>
     </html>
-  )
+  );
 } 
