@@ -19,7 +19,7 @@ export default function Home() {
             />
           </div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 sm:mb-9 bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-blue-100 to-sky-500 animate-gradient animate-glow">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 sm:mb-9 bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-neutral-100 to-sky-500">
             Transcendence
           </h1>
           
