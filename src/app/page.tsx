@@ -15,7 +15,7 @@ export default function Home() {
               width={120}
               height={120}
               priority
-              className="w-24 h-24 sm:w-32 sm:h-32"
+              className="w-24 h-24 sm:w-32 sm:h-32 opacity-75"
             />
           </div>
           

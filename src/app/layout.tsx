@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import "./globals.css";
 import SmokeBackground from "@/components/SmokeBackground";
 
-const _geistSans = Geist({
+const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const _geistMono = Geist_Mono({
+const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <div className="relative min-h-screen overflow-hidden">
           <SmokeBackground />
