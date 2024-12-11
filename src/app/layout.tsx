@@ -1,5 +1,7 @@
+import React from 'react'
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Button } from "@/components/ui/button";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,16 +21,35 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="dark">
+      <body>
+        <div className="relative min-h-screen overflow-hidden">
+          <div className="gradient-background" />
+          
+          {/* Navigation */}
+          <nav className="fixed top-5 left-0 right-0 z-50">
+            <div className="flex items-center justify-center h-16 px-4 backdrop-blur-sm bg-background/10">
+              <div className="flex gap-8">
+                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10">
+                  About
+                </Button>
+                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10">
+                  Learn
+                </Button>
+                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10">
+                  Pricing
+                </Button>
+              </div>
+            </div>
+          </nav>
+
+          {children}
+        </div>
       </body>
     </html>
-  );
-}
+  )
+} 
