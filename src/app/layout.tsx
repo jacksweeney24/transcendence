@@ -47,6 +47,10 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; img-src 'self' data: blob: https:;" />
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+      </head>
       <body>
         <div className="relative min-h-screen overflow-hidden">
           <SmokeBackground />
