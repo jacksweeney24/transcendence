@@ -120,3 +120,11 @@
     overscroll-behavior-y: none;
   }
 }
+
+@supports (-webkit-touch-callout: none) {
+  .gradient-background,
+  .text-transparent {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
