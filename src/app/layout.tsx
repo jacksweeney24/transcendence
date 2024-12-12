@@ -62,20 +62,29 @@ export default function RootLayout({
                 <Button 
                   variant="ghost" 
                   className="text-sm sm:text-base text-white/70 hover:text-white hover:bg-white/10"
+                  onClick={() => {
+                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   About
                 </Button>
                 <Button 
                   variant="ghost" 
                   className="text-sm sm:text-base text-white/70 hover:text-white hover:bg-white/10"
+                  onClick={() => {
+                    document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   Events
                 </Button>
                 <Button 
                   variant="ghost" 
                   className="text-sm sm:text-base text-white/70 hover:text-white hover:bg-white/10"
+                  onClick={() => {
+                    document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
-                  Pricing
+                  Community
                 </Button>
               </div>
             </div>

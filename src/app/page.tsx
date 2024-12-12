@@ -39,7 +39,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <section className="relative z-10 py-6 px-4 sm:px-6 lg:px-8">
+      <section id="events" className="relative z-10 py-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
             Upcoming Events
@@ -200,7 +200,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 py-16 px-4 sm:px-6 lg:px-8">
+      <section id="community" className="relative z-10 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <Card className="border border-white/10 bg-black/30 backdrop-blur-sm rounded-xl overflow-hidden">
             <CardContent className="p-8 sm:p-12">
@@ -285,7 +285,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 py-12 px-4 sm:px-6 lg:px-8 mb-16">
+      <section id="about" className="relative z-10 py-12 px-4 sm:px-6 lg:px-8 mb-16">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
             About Transcendence
