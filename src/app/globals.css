@@ -62,12 +62,6 @@
   body {
     @apply bg-black text-foreground;
     font-family: var(--font-geist-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000;
-    transform-style: preserve-3d;
   }
 }
 
@@ -132,26 +126,5 @@
   .text-transparent {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-}
-
-@layer critical {
-  .text-transparent {
-    color: transparent;
-  }
-  
-  .bg-clip-text {
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-  
-  .bg-gradient-to-r {
-    background-image: linear-gradient(to right, var(--tw-gradient-stops));
-  }
-  
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
   }
 }
