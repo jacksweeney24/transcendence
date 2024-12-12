@@ -21,16 +21,17 @@ const SmokeBackground = () => {
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true,
       antialias: true,
-      powerPreference: "high-performance"
+      powerPreference: "high-performance",
+      stencil: false,
+      depth: false
     });
     
-    // Set renderer size with pixel ratio consideration
-    const updateSize = () => {
-      const pixelRatio = Math.min(window.devicePixelRatio, 2);
-      renderer.setPixelRatio(pixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-    updateSize();
+    renderer.setPixelRatio(1);
+    renderer.domElement.style.position = 'fixed';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
 
     container.appendChild(renderer.domElement);
 
@@ -94,7 +95,8 @@ const SmokeBackground = () => {
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      updateSize();
+      renderer.setPixelRatio(1);
+      renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
     window.addEventListener('resize', handleResize);
@@ -112,11 +114,17 @@ const SmokeBackground = () => {
   return (
     <div 
       ref={containerRef} 
-      className="fixed inset-0 -z-10" 
+      className="fixed inset-0 -z-10 overflow-hidden" 
       style={{ 
-        willChange: 'transform',
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden'
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        perspective: '1000px',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        transformStyle: 'preserve-3d'
       }} 
     />
   );
