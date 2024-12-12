@@ -8,17 +8,30 @@ const SmokeBackground = () => {
 
   useEffect(() => {
     const container = containerRef.current;
-
     if (!container) return;
+
+    // Prevent mobile viewport scaling issues
+    const meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    document.getElementsByTagName('head')[0].appendChild(meta);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true,
-      antialias: true 
+      antialias: true,
+      powerPreference: "high-performance"
     });
     
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    // Set renderer size with pixel ratio consideration
+    const updateSize = () => {
+      const pixelRatio = Math.min(window.devicePixelRatio, 2);
+      renderer.setPixelRatio(pixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+    updateSize();
+
     container.appendChild(renderer.domElement);
 
     // Smoke material setup
@@ -63,15 +76,15 @@ const SmokeBackground = () => {
 
     camera.position.z = 500;
 
-    // Smoother animation
+    // Optimize animation
+    let animationFrameId: number;
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
 
       smokeParticles.forEach((particle) => {
-        particle.rotation.z += 0.001; // Slightly faster than original but not too fast
+        particle.rotation.z += 0.001;
       });
 
-      // Gentle light movement
       pointLight.position.x = Math.sin(Date.now() * 0.0005) * 150;
       pointLight.position.y = Math.cos(Date.now() * 0.0005) * 150;
 
@@ -81,7 +94,7 @@ const SmokeBackground = () => {
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      updateSize();
     };
 
     window.addEventListener('resize', handleResize);
@@ -89,12 +102,24 @@ const SmokeBackground = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
       container.removeChild(renderer.domElement);
       scene.clear();
+      meta.remove();
     };
   }, []);
 
-  return <div ref={containerRef} className="fixed inset-0 -z-10" />;
+  return (
+    <div 
+      ref={containerRef} 
+      className="fixed inset-0 -z-10" 
+      style={{ 
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden'
+      }} 
+    />
+  );
 };
 
 export default SmokeBackground;
